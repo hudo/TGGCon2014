@@ -1,0 +1,5 @@
+1. Igor i Hrvoje
+2. Uvod u app
+3. Model podataka
+4. EF & WebAPI (server)
+5. Klijentska aplikacija (Angular)
