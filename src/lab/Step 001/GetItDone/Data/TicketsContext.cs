@@ -1,5 +1,12 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.ModelConfiguration.Configuration;
+using System.Linq.Expressions;
+using System.Reflection;
 using GetItDone.Domain;
+using GetItDone.Infrastructure;
 
 namespace GetItDone.Data
 {
@@ -15,8 +22,14 @@ namespace GetItDone.Data
                 .WithMany(x => x.Users)
                 .Map(x=>x.MapLeftKey("UserId").MapRightKey("RoleId").ToTable("UserUserRoles"));
 
-            modelBuilder.Entity<TicketNote>().ToTable("TicketNote");
-               
+            modelBuilder.Entity<TicketNote>()
+                .ToTable("TicketNote")
+                .HasRequired(x => x.CreatedBy).WithMany().HasForeignKey(x => x.CreatedById);
+                
+
+            modelBuilder.Entity<Ticket>().Ignore(x => x.TicketNotes);
+            modelBuilder.Entity<Ticket>().HasMany<Ticket, TicketNote>("_notes");
+            
             base.OnModelCreating(modelBuilder);
         }
     }

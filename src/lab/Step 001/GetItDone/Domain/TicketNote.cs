@@ -19,7 +19,7 @@ namespace GetItDone.Domain
 
         public int TicketNoteId { get; set; }
         public int CreatedById { get; set; }
-        public CustomerSupport CreatedBy { get; set; }
+        public User CreatedBy { get; set; }
         public DateTime? Created { get; set; }
         public string Content { get; set; }
 

@@ -5,11 +5,16 @@ namespace GetItDone.Domain
 {
     public class User
     {
-        public int Id { get; protected set; }
+        public User()
+        {
+            Roles = new List<UserRole>();    
+        }
+
+        public int UserId { get; protected set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public ICollection<UserRole> Roles { get; private set; }
+        public virtual ICollection<UserRole> Roles { get; private set; }
 
         public bool Is<T>() where T : UserRole
         {
