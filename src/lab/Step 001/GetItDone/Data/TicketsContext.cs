@@ -17,16 +17,10 @@ namespace GetItDone.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasMany(x => x.Roles)
-                .WithMany(x => x.Users)
-                .Map(x=>x.MapLeftKey("UserId").MapRightKey("RoleId").ToTable("UserUserRoles"));
-
             modelBuilder.Entity<TicketNote>()
                 .ToTable("TicketNote")
                 .HasRequired(x => x.CreatedBy).WithMany().HasForeignKey(x => x.CreatedById);
                 
-
             modelBuilder.Entity<Ticket>().Ignore(x => x.TicketNotes);
             modelBuilder.Entity<Ticket>().HasMany<Ticket, TicketNote>("_notes");
             

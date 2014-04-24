@@ -25,5 +25,7 @@ namespace GetItDone.Domain
         {
             return Roles.OfType<T>().Single();
         }
+
+        // TODO-HH: add/remove roles
     }
 }

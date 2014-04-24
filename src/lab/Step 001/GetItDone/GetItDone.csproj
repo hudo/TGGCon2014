@@ -45,6 +45,9 @@
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -87,9 +90,9 @@
     <Compile Include="Domain\UserRole.cs" />
     <Compile Include="Infrastructure\DataContextExtensions.cs" />
     <Compile Include="Infrastructure\ValueObject.cs" />
-    <Compile Include="Migrations\201404222154564_Init.cs" />
-    <Compile Include="Migrations\201404222154564_Init.Designer.cs">
-      <DependentUpon>201404222154564_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201404241949128_Init.cs" />
+    <Compile Include="Migrations\201404241949128_Init.Designer.cs">
+      <DependentUpon>201404241949128_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,8 +108,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201404222154564_Init.resx">
-      <DependentUpon>201404222154564_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201404241949128_Init.resx">
+      <DependentUpon>201404241949128_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
