@@ -16,13 +16,16 @@ namespace GetItDone.Migrations
                         Description = c.String(),
                         Created = c.DateTime(nullable: false),
                         Closed = c.DateTime(),
+                        CreatedById = c.Int(nullable: false),
                         TicketPriority = c.Int(nullable: false),
                         TicketStatus = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.TicketId);
+                .PrimaryKey(t => t.TicketId)
+                .ForeignKey("dbo.Users", t => t.CreatedById, cascadeDelete: true)
+                .Index(t => t.CreatedById);
             
             CreateTable(
-                "dbo.TicketNote",
+                "dbo.TicketNotes",
                 c => new
                     {
                         TicketNoteId = c.Int(nullable: false, identity: true),
@@ -47,31 +50,18 @@ namespace GetItDone.Migrations
                     })
                 .PrimaryKey(t => t.UserId);
             
-            CreateTable(
-                "dbo.UserRoles",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.TicketNote", "TicketId", "dbo.Tickets");
-            DropForeignKey("dbo.TicketNote", "CreatedById", "dbo.Users");
-            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
-            DropIndex("dbo.UserRoles", new[] { "UserId" });
-            DropIndex("dbo.TicketNote", new[] { "TicketId" });
-            DropIndex("dbo.TicketNote", new[] { "CreatedById" });
-            DropTable("dbo.UserRoles");
+            DropForeignKey("dbo.Tickets", "CreatedById", "dbo.Users");
+            DropForeignKey("dbo.TicketNotes", "TicketId", "dbo.Tickets");
+            DropForeignKey("dbo.TicketNotes", "CreatedById", "dbo.Users");
+            DropIndex("dbo.TicketNotes", new[] { "TicketId" });
+            DropIndex("dbo.TicketNotes", new[] { "CreatedById" });
+            DropIndex("dbo.Tickets", new[] { "CreatedById" });
             DropTable("dbo.Users");
-            DropTable("dbo.TicketNote");
+            DropTable("dbo.TicketNotes");
             DropTable("dbo.Tickets");
         }
     }

@@ -28,12 +28,13 @@ namespace GetItDone.Domain
             _notes = new List<TicketNote>();
         }
 
-        public int TicketId { get; set; }
+        public int TicketId { get; private set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Closed { get; set; }
-        public virtual User CreatedBy { get; set; }
+        public int CreatedById { get; private set; }
+        public virtual User CreatedBy { get; private set; }
         public TicketPriority TicketPriority { get; set; }
         public TicketStatus TicketStatus { get; private set; }
 
@@ -59,6 +60,5 @@ namespace GetItDone.Domain
                 throw new Exception("Can't change status from " + this.TicketStatus + " to " + newStatus);
             }
         }
-        
     }
 }

@@ -14,7 +14,7 @@ namespace GetItDone.Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public virtual ICollection<UserRole> Roles { get; private set; }
+        public virtual IEnumerable<UserRole> Roles { get; private set; }
 
         public bool Is<T>() where T : UserRole
         {

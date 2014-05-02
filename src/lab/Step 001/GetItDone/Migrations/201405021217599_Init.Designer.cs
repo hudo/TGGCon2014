@@ -13,7 +13,7 @@ namespace GetItDone.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201404241949128_Init"; }
+            get { return "201405021217599_Init"; }
         }
         
         string IMigrationMetadata.Source

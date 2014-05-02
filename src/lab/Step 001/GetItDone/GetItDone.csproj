@@ -102,9 +102,9 @@
     <Compile Include="Domain\UserRole.cs" />
     <Compile Include="Infrastructure\DataContextExtensions.cs" />
     <Compile Include="Infrastructure\ValueObject.cs" />
-    <Compile Include="Migrations\201404241949128_Init.cs" />
-    <Compile Include="Migrations\201404241949128_Init.Designer.cs">
-      <DependentUpon>201404241949128_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201405021217599_Init.cs" />
+    <Compile Include="Migrations\201405021217599_Init.Designer.cs">
+      <DependentUpon>201405021217599_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,8 +113,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201404241949128_Init.resx">
-      <DependentUpon>201404241949128_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405021217599_Init.resx">
+      <DependentUpon>201405021217599_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,10 +19,10 @@ namespace GetItDone.Domain
             
         }
 
-        public int TicketNoteId { get; set; }
-        public int CreatedById { get; set; }
-        public virtual User CreatedBy { get; set; }
-        public DateTime? Created { get; set; }
+        public int TicketNoteId { get; private set; }
+        public int CreatedById { get; private set; }
+        public virtual User CreatedBy { get; private set; }
+        public DateTime? Created { get; private set; }
         public string Content { get; set; }
 
         public int TicketId { get; private set; }
