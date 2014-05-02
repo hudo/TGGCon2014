@@ -1,13 +1,15 @@
 ﻿using System;
-using GetItDone.Infrastructure;
 
 namespace GetItDone.Domain
 {
     public class TicketNote
     {
-        public TicketNote(int createdBy, string content)
+        public TicketNote(Ticket ticket, User createdBy, string content)
         {
-            CreatedById = createdBy;
+            CreatedById = createdBy.UserId;
+            CreatedBy = createdBy;
+            Ticket = ticket;
+            TicketId = ticket.TicketId;
             Content = content;
             Created = DateTime.Now;
         }
@@ -19,11 +21,11 @@ namespace GetItDone.Domain
 
         public int TicketNoteId { get; set; }
         public int CreatedById { get; set; }
-        public User CreatedBy { get; set; }
+        public virtual User CreatedBy { get; set; }
         public DateTime? Created { get; set; }
         public string Content { get; set; }
 
         public int TicketId { get; private set; }
-        public Ticket Ticket { get; private set; }
+        public virtual Ticket Ticket { get; private set; }
     }
 }
