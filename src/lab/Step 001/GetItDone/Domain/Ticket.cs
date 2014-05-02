@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace GetItDone.Domain
@@ -13,9 +14,9 @@ namespace GetItDone.Domain
             {TicketStatus.Closed, new TicketStatus[]{} }
         }; 
 
-        private Ticket()
+        protected Ticket()
         {
-            
+            _notes = new Collection<TicketNote>();
         }
 
         public Ticket(string title, TicketPriority priority, User createdBy)
@@ -25,7 +26,7 @@ namespace GetItDone.Domain
 
             Title = title;
             TicketPriority = priority;
-            _notes = new List<TicketNote>();
+            _notes = new Collection<TicketNote>();
 
             TicketStatus = TicketStatus.New;
             Created = DateTime.Now;
@@ -42,9 +43,13 @@ namespace GetItDone.Domain
         public TicketStatus TicketStatus { get; private set; }
 
         protected virtual ICollection<TicketNote> _notes { get; set; }
+
         public IEnumerable<TicketNote> TicketNotes
         {
-            get { return _notes; }
+            get
+            {
+                return _notes.ToList();
+            }
         }
 
         public void AddNote(User user, string content)

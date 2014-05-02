@@ -14,7 +14,7 @@ namespace GetItDone.Domain
             Created = DateTime.Now;
         }
 
-        private TicketNote()
+        protected TicketNote()
         {
             
         }
@@ -22,7 +22,7 @@ namespace GetItDone.Domain
         public int TicketNoteId { get; private set; }
         public int CreatedById { get; private set; }
         public virtual User CreatedBy { get; private set; }
-        public DateTime? Created { get; private set; }
+        public DateTime Created { get; private set; }
         public string Content { get; set; }
 
         public int TicketId { get; private set; }

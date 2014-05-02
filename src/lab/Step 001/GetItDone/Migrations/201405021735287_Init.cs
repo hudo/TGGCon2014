@@ -30,7 +30,7 @@ namespace GetItDone.Migrations
                     {
                         TicketNoteId = c.Int(nullable: false, identity: true),
                         CreatedById = c.Int(nullable: false),
-                        Created = c.DateTime(),
+                        Created = c.DateTime(nullable: false),
                         Content = c.String(),
                         TicketId = c.Int(nullable: false),
                     })

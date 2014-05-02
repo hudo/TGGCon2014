@@ -16,7 +16,6 @@ namespace GetItDone.Data
                 
             modelBuilder.Entity<Ticket>()
                 .ToTable("Tickets")
-                .Ignore(x => x.TicketNotes)
                 .HasMany<Ticket, TicketNote>("_notes");
 
             modelBuilder.Entity<Ticket>()
