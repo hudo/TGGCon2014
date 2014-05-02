@@ -1,3 +1,5 @@
+using GetItDone.Domain;
+
 namespace GetItDone.Migrations
 {
     using System;
@@ -14,18 +16,18 @@ namespace GetItDone.Migrations
 
         protected override void Seed(GetItDone.Data.TicketsContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var customer = new Customer();
+            var support = new CustomerSupport();
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            var user = new User("demo", "demo");
+            user.AddToRole(support);
+
+            context.Users.AddOrUpdate(x => x.LastName, user);
+
+            var ticket = new Ticket("test ticket", TicketPriority.Medium, user);
+            ticket.AddNote(user, "some note");
+
+            context.Tickets.AddOrUpdate(x=>x.Title, ticket);
         }
     }
 }

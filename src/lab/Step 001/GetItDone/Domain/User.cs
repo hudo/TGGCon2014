@@ -1,20 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace GetItDone.Domain
 {
     public class User
     {
-        public User()
+        private User()
         {
-            Roles = new List<UserRole>();    
+        }
+
+        public User(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Roles = new Collection<UserRole>();
         }
 
         public int UserId { get; protected set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public virtual IEnumerable<UserRole> Roles { get; private set; }
+        public virtual ICollection<UserRole> Roles { get; private set; }
 
         public bool Is<T>() where T : UserRole
         {
@@ -26,6 +33,13 @@ namespace GetItDone.Domain
             return Roles.OfType<T>().Single();
         }
 
-        // TODO-HH: add/remove roles
+        public void AddToRole<T>(T role) where T:UserRole
+        {
+            if (!Is<T>())
+            {
+                Roles.Add(role);
+            }
+        }
+
     }
 }

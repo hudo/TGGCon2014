@@ -26,13 +26,16 @@ namespace GetItDone.Domain
             Title = title;
             TicketPriority = priority;
             _notes = new List<TicketNote>();
+
+            TicketStatus = TicketStatus.New;
+            Created = DateTime.Now;
         }
 
         public int TicketId { get; private set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
-        public DateTime? Closed { get; set; }
+        public DateTime? Closed { get; private set; }
         public int CreatedById { get; private set; }
         public virtual User CreatedBy { get; private set; }
         public TicketPriority TicketPriority { get; set; }
@@ -54,6 +57,11 @@ namespace GetItDone.Domain
             if (_stateTransitionRules[this.TicketStatus].Contains(newStatus))
             {
                 this.TicketStatus = newStatus;
+
+                if (newStatus == TicketStatus.Closed)
+                {
+                    Closed = DateTime.Now;
+                }
             }
             else
             {

@@ -36,7 +36,7 @@ namespace GetItDone.Migrations
                     })
                 .PrimaryKey(t => t.TicketNoteId)
                 .ForeignKey("dbo.Users", t => t.CreatedById, cascadeDelete: true)
-                .ForeignKey("dbo.Tickets", t => t.TicketId, cascadeDelete: true)
+                .ForeignKey("dbo.Tickets", t => t.TicketId, cascadeDelete: false)
                 .Index(t => t.CreatedById)
                 .Index(t => t.TicketId);
             
@@ -50,6 +50,18 @@ namespace GetItDone.Migrations
                     })
                 .PrimaryKey(t => t.UserId);
             
+            CreateTable(
+                "dbo.UserRoles",
+                c => new
+                    {
+                        UserRoleId = c.Int(nullable: false, identity: true),
+                        UserId = c.Int(nullable: false),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.UserRoleId)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
         }
         
         public override void Down()
@@ -57,9 +69,12 @@ namespace GetItDone.Migrations
             DropForeignKey("dbo.Tickets", "CreatedById", "dbo.Users");
             DropForeignKey("dbo.TicketNotes", "TicketId", "dbo.Tickets");
             DropForeignKey("dbo.TicketNotes", "CreatedById", "dbo.Users");
+            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
+            DropIndex("dbo.UserRoles", new[] { "UserId" });
             DropIndex("dbo.TicketNotes", new[] { "TicketId" });
             DropIndex("dbo.TicketNotes", new[] { "CreatedById" });
             DropIndex("dbo.Tickets", new[] { "CreatedById" });
+            DropTable("dbo.UserRoles");
             DropTable("dbo.Users");
             DropTable("dbo.TicketNotes");
             DropTable("dbo.Tickets");
