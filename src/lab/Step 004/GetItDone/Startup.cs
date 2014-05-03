@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Web.Http;
+﻿using System.Web.Http;
 using AutoMapper;
 using GetItDone.Data;
 using GetItDone.Domain;
