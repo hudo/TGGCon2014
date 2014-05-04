@@ -6,7 +6,7 @@ namespace GetItDone.Domain
 {
     public class User
     {
-        private User()
+        protected User()
         {
         }
 
@@ -21,7 +21,7 @@ namespace GetItDone.Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public virtual ICollection<UserRole> Roles { get; private set; }
+        public virtual ICollection<UserRole> Roles { get; protected set; }
 
         public bool Is<T>() where T : UserRole
         {

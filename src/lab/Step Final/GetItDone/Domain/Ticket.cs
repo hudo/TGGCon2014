@@ -32,15 +32,15 @@ namespace GetItDone.Domain
             Created = DateTime.Now;
         }
 
-        public int TicketId { get; private set; }
+        public int TicketId { get; protected set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
-        public DateTime? Closed { get; private set; }
-        public int CreatedById { get; private set; }
-        public virtual User CreatedBy { get; private set; }
+        public DateTime? Closed { get; protected set; }
+        public int CreatedById { get; protected set; }
+        public virtual User CreatedBy { get; protected set; }
         public TicketPriority TicketPriority { get; set; }
-        public TicketStatus TicketStatus { get; private set; }
+        public TicketStatus TicketStatus { get; protected set; }
 
         protected virtual ICollection<TicketNote> _notes { get; set; }
 
