@@ -1,20 +1,17 @@
 ﻿var getItDone = {};
 
 (function () {
-    getItDone.app = angular.module("app", ["ngRoute", "ngResource", "ngSanitize"]);
+    getItDone.app = angular.module("app", ["ngRoute"]);
 
     getItDone.app.config(["$routeProvider", function($routeProvider) {
-            $routeProvider.when("/new", {
-                templateUrl: "/app/views/createTicket.html",
-                controller: "ticketController"
-            }).when("/edit/:articleId", {
-                templateUrl: "/app/views/createTicket.html",
-                controller: "ticketController"
-            }).when("/dashboard", {
+        $routeProvider.when("/", {
                 templateUrl: "/app/views/dashboard.html",
                 controller: "dashboardController"
+            }).when("/new", {
+                templateUrl: "/app/views/createTicket.html",
+                controller: "ticketController"
             }).otherwise({
-                redirectTo: '/dashboard'
+                redirectTo: '/'
             });;
         }
     ]);
