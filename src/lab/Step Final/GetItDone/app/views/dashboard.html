@@ -1,0 +1,5 @@
+﻿<ul>
+    <li ng-repeat="item in items">{{ item.AuthorName }}: {{ item.Body }}</li>
+</ul>
+<input type="text" class="form-control" ng-model="newnote.Body" />
+<input type="button" value="Add note" ng-click="saveNote()"/>
