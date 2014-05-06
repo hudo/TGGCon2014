@@ -1,8 +1,14 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Antlr.Runtime;
 using AutoMapper.QueryableExtensions;
 using GetItDone.Data;
+using GetItDone.Domain;
 using GetItDone.ViewModel;
 
 namespace GetItDone.Api
@@ -37,6 +43,26 @@ namespace GetItDone.Api
             }
 
             return Ok(ticket);
+        }
+
+        public async Task<HttpResponseMessage> Put(TicketModel inputModel)
+        {
+            return await Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK));
+        }
+
+        public async Task<HttpResponseMessage> Post(TicketModel model)
+        {
+            var me = await _db.Users.FirstAsync();
+            
+            var ticket = new Ticket(model.Title, TicketPriority.Medium, me);
+
+            _db.Tickets.Add(ticket);
+            await _db.SaveChangesAsync();
+
+            var response = new HttpResponseMessage(HttpStatusCode.Created);
+            response.Headers.Location = new Uri("/api/tickets/" + ticket.TicketId, UriKind.Relative);
+
+            return response;
         }
     }
 }

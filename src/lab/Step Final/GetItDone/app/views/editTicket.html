@@ -2,19 +2,26 @@
     <div>
         <div>
             <label>Title:</label>
-            <input ng-model='model.Title'>
+            <input ng-model="model.title" ng-readonly="!isOpen()">
+        </div>
+        <div>
+            <label>Description:</label>
+            <textarea ng-model="model.description"></textarea>
         </div>
         <div>
             <label>Supported user:</label>
-            <input ng-model='model.SupportedUser'>
+            {{model.createdBy}}
         </div>
         <div>
             <label>Priority:</label>
-            <input ng-model='model.Priority'>
+            <select data-ng-options="o.name for o in priorities" data-ng-model="selectedPriority" ng-disabled="!isOpen()"></select>
         </div>
         <div>
             <label>Status:</label>
-            <input ng-model='model.Status'>
+            {{selectedStatus.name}}
         </div>
     </div>
+    <button ng-click="saveTicket()">Save</button>
+    <button ng-click="open()" ng-show="isNew()">Open</button>
+    <button ng-click="close()" ng-show="isOpen()">Close</button>
 </div>

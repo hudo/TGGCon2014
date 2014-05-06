@@ -24,6 +24,8 @@ namespace GetItDone.Domain
             if(!createdBy.Is<CustomerSupport>())
                 throw new Exception("This user is not customer support!");
 
+            CreatedBy = createdBy;
+
             Title = title;
             TicketPriority = priority;
             _notes = new Collection<TicketNote>();

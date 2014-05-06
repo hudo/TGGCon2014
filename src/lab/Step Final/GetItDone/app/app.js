@@ -1,7 +1,7 @@
 ﻿var getItDone = {};
 
 (function () {
-    getItDone.app = angular.module("app", ["ngRoute"]);
+    getItDone.app = angular.module("app", ["ngRoute", "ngResource"]);
 
     getItDone.app.config(["$routeProvider", function($routeProvider) {
         $routeProvider.when("/", {
@@ -15,4 +15,6 @@
             });;
         }
     ]);
+
+    window.log = console.log;
 }());

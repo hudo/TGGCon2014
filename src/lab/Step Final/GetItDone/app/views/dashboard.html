@@ -3,7 +3,10 @@
         <h1>Dashboard</h1>        
     </div>
     <div>
-        <button ng-click='createNewTicket()'>Create new ticket</button>
+        <label>
+            <input ng-model="newTicket.name" />
+        </label>
+        <button ng-click='createNewTicket()' ng-disabled="hasName()">Create new ticket</button>
     </div>
     <div>
         <table>
@@ -15,14 +18,14 @@
                 <th>Commands</th>
             </tr>
             <tr ng-repeat='ticket in model.tickets'>
-                <td>{{ticket.Title}}</td>
-                <td>{{ticket.SupportedUser}}</td>
-                <td>{{ticket.Status}}</td>
-                <td>{{ticket.Priority}}</td>
+                <td>{{ticket.title}}</td>
+                <td>{{ticket.createdBy}}</td>
+                <td>{{ticket.ticketStatus}}</td>
+                <td>{{ticket.ticketPriority}}</td>
                 <td>
-                    <button ng-click='openTicket(ticket.Id)'>Open</button>
-                    <button ng-click='closeTicket(ticket.Id)'>Close</button>
-                    <button ng-click='deleteTicket(ticket.Id)'>Delete</button>
+                    <button ng-click='openTicket(ticket.ticketId)'>Open</button>
+                    <button ng-click='closeTicket(ticket.ticketId)'>Close</button>
+                    <button ng-click='deleteTicket(ticket.ticketId)'>Delete</button>
                 </td>
             </tr>
         </table>        
