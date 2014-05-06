@@ -7,11 +7,11 @@
         $routeProvider.when("/", {
                 templateUrl: "/app/views/dashboard.html",
                 controller: "dashboardController"
-            }).when("/new", {
-                templateUrl: "/app/views/createTicket.html",
-                controller: "ticketController"
+            }).when("/edit/:ticketId", {
+                templateUrl: "/app/views/editTicket.html",
+                controller: "editTicketController"
             }).otherwise({
-                redirectTo: '/'
+                redirectTo: "/"
             });;
         }
     ]);

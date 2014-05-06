@@ -1,6 +1,30 @@
-﻿<p>
-    {{model.greeting}}
-</p>
-<p>
-    <button ng-click="newTicket()">New ticket</button>
-</p>
+﻿<div>
+    <div>
+        <h1>Dashboard</h1>        
+    </div>
+    <div>
+        <button ng-click='createNewTicket()'>Create new ticket</button>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Supported User</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Commands</th>
+            </tr>
+            <tr ng-repeat='ticket in model.tickets'>
+                <td>{{ticket.Title}}</td>
+                <td>{{ticket.SupportedUser}}</td>
+                <td>{{ticket.Status}}</td>
+                <td>{{ticket.Priority}}</td>
+                <td>
+                    <button ng-click='openTicket(ticket.Id)'>Open</button>
+                    <button ng-click='closeTicket(ticket.Id)'>Close</button>
+                    <button ng-click='deleteTicket(ticket.Id)'>Delete</button>
+                </td>
+            </tr>
+        </table>        
+    </div>
+</div>

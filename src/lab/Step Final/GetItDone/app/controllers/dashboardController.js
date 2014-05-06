@@ -1,11 +1,17 @@
-﻿(function() {
-    var dashboardController = function($scope, $location) {
-        $scope.model = { greeting: "Hello Dashboard" };
+﻿(function () {
+    var dashboardController = function ($scope, $location, ticketService) {
+        $scope.model = {
+            tickets: ticketService.getAllTickets()
+        };
 
-        $scope.newTicket = function() {
-            $location.path("/new");
+        $scope.createNewTicket = function () {
+            
+        }
+
+        $scope.openTicket = function(ticketId) {
+            $location.path("/edit/" + ticketId);
         }
     };
 
-    getItDone.app.controller("dashboardController", ["$scope", "$location", dashboardController]);
+    getItDone.app.controller("dashboardController", ["$scope", "$location", "ticketService", dashboardController]);
 })();
