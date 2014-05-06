@@ -4,9 +4,9 @@
     </div>
     <div>
         <label>
-            <input ng-model="newTicket.name" />
+            <input ng-model="model.newTicketName" />
         </label>
-        <button ng-click='createNewTicket()' ng-disabled="hasName()">Create new ticket</button>
+        <button ng-click='createNewTicket()' ng-disabled="!canCreateNewTicket()">Create new ticket</button>
     </div>
     <div>
         <table>

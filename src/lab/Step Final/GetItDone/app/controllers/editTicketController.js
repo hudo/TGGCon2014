@@ -1,44 +1,51 @@
 ﻿(function() {
-    var editTicketController = function ($scope, $routeParams, ticketService) {
+    var editTicketController = function ($scope, $routeParams, $location, ticketService, enums) {
 
-        $scope.statuses = [{ name: "New", id: "0" }, { name: "In Progress", id: "1" }, { name: "Closed", id: "2" }];
-        $scope.priorities = [{ name: "Low", id: "0" }, { name: "Medium", id: "1" }, { name: "High", id: "2" }];
-        $scope.selectedStatus = $scope.statuses[0];
+        $scope.enums = enums;
+
+        $scope.model = {
+            selectedStatus: $scope.enums.ticketStatuses[0],
+            selectedPriority: $scope.enums.ticketPriorities[0]
+        }
 
         ticketService.get({ id: $routeParams.ticketId }).$promise.then(function (data) {
-            $scope.model = data;
+            $scope.model.ticket = data;
 
-            // preselect status
-            $scope.selectedStatus = $scope.statuses[data.ticketStatus];
-            $scope.selectedPriority = $scope.priorities[data.ticketPriority];
+            $scope.model.selectedStatus = $scope.enums.ticketStatuses[data.ticketStatus];
+            $scope.model.selectedPriority = $scope.enums.ticketPriorities[data.ticketPriority];
         });
 
         $scope.isOpen = function() {
-            return $scope.selectedStatus.id == 1;
+            return $scope.model.selectedStatus.id == 1;
         }
 
         $scope.isNew = function () {
-            return $scope.selectedStatus.id == 0;
+            return $scope.model.selectedStatus.id == 0;
         }
 
         $scope.isClosed = function () {
-            return $scope.selectedStatus.id == 2;
+            return $scope.model.selectedStatus.id == 2;
         }
 
         $scope.saveTicket = function() {
-            $scope.model.ticketStatus = $scope.selectedStatus.id;
-            $scope.model.ticketPriority = $scope.selectedPriority.id;
+            $scope.model.ticket.ticketStatus = $scope.selectedStatus.id;
+            $scope.model.ticket.ticketPriority = $scope.selectedPriority.id;
 
-            $scope.model.$update();
+            $scope.model.ticket.$update();
         }
 
-        $scope.open = function () {
-            $scope.selectedStatus = $scope.statuses[1];
+        $scope.openTicket = function () {
+            $scope.model.selectedStatus = $scope.enums.ticketStatuses[1];
         }
-        $scope.close = function () {
-            $scope.selectedStatus = $scope.statuses[2];
+
+        $scope.closeTicket = function () {
+            $scope.model.selectedStatus = $scope.enums.ticketStatuses[2];
+        }
+
+        $scope.goToDashboard = function() {
+            $location.path("/");
         }
     };
 
-    getItDone.app.controller("editTicketController", ["$scope", "$routeParams", "ticketService", editTicketController]);
+    getItDone.app.controller("editTicketController", ["$scope", "$routeParams", "$location", "ticketService", "enums", editTicketController]);
 })();

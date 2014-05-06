@@ -2,26 +2,30 @@
     <div>
         <div>
             <label>Title:</label>
-            <input ng-model="model.title" ng-readonly="!isOpen()">
+            <input ng-model="model.ticket.title" ng-readonly="!isOpen()">
         </div>
         <div>
             <label>Description:</label>
-            <textarea ng-model="model.description" ng-readonly="!isOpen()"></textarea>
+            <textarea ng-model="model.ticket.description" ng-readonly="!isOpen()"></textarea>
         </div>
         <div>
             <label>Supported user:</label>
-            {{model.createdBy}}
+            {{model.ticket.createdBy}}
         </div>
         <div>
             <label>Priority:</label>
-            <select data-ng-options="o.name for o in priorities" data-ng-model="selectedPriority" ng-disabled="!isOpen()"></select>
+            <select data-ng-options="o.name for o in enums.ticketPriorities" data-ng-model="model.selectedPriority" ng-disabled="!isOpen()"></select>
         </div>
         <div>
             <label>Status:</label>
-            {{selectedStatus.name}}
+            {{model.selectedStatus.name}}
         </div>
     </div>
     <button ng-click="saveTicket()">Save</button>
-    <button ng-click="open()" ng-show="isNew()">Open</button>
-    <button ng-click="close()" ng-show="isOpen()">Close</button>
+    <button ng-click="openTicket()" ng-show="isNew()">Open</button>
+    <button ng-click="closeTicket()" ng-show="isOpen()">Close</button>
+    <div>
+        <hr/>
+        <button ng-click="goToDashboard()">Go to dashboard</button>
+    </div>
 </div>

@@ -1,17 +1,17 @@
 ﻿(function () {
     var dashboardController = function ($scope, $location, ticketService, enums) {
 
-        $scope.newTicket = { name: "" };
+        //$scope.newTicket = { name: "" };
 
         $scope.enums = enums;
 
         $scope.model = {
-            //tickets: ticketService.query()
-            tickets: [ { title: "First", createdBy: "Tom", ticketStatus: 0, ticketPriority: 1}]
+            tickets: ticketService.query(),
+            newTicketName: ""
         };
 
         $scope.createNewTicket = function () {
-            ticketService.save({ title: $scope.newTicket.name },function (result, headers) {
+            ticketService.save({ title: $scope.model.newTicketName }, function (result, headers) {
                 var ticketid = headers("location").split("/")[3];
                 $location.path("/edit/" + ticketid);
             });
@@ -21,8 +21,8 @@
             $location.path("/edit/" + ticketId);
         }
 
-        $scope.hasName = function() {
-            return $scope.newTicket.name==0;
+        $scope.canCreateNewTicket = function() {
+            return $scope.model.newTicketName != "";
         }
     };
 
