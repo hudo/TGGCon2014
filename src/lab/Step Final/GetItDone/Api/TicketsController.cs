@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Antlr.Runtime;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GetItDone.Data;
 using GetItDone.Domain;
@@ -47,14 +48,26 @@ namespace GetItDone.Api
 
         public async Task<HttpResponseMessage> Put(TicketModel inputModel)
         {
-            return await Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK));
+            var ticket = await _db.Tickets.FirstAsync(x => x.TicketId == inputModel.TicketId);
+            Mapper.Map(inputModel, ticket);
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                var message = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                message.Content = new StringContent(e.Message);
+                return message;
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        public async Task<HttpResponseMessage> Post(TicketModel model)
+        public async Task<HttpResponseMessage> Post(TicketModel inputModel)
         {
             var me = await _db.Users.FirstAsync();
             
-            var ticket = new Ticket(model.Title, TicketPriority.Medium, me);
+            var ticket = new Ticket(inputModel.Title, TicketPriority.Medium, me);
 
             _db.Tickets.Add(ticket);
             await _db.SaveChangesAsync();

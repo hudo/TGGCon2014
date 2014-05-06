@@ -4,6 +4,7 @@ using GetItDone.Data;
 using GetItDone.Domain;
 using GetItDone.Infrastructure;
 using GetItDone.ViewModel;
+using Microsoft.Ajax.Utilities;
 using Microsoft.Owin;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -40,6 +41,9 @@ namespace GetItDone
 
             Mapper.CreateMap<Ticket, TicketModel>()
                 .ForMember(x => x.CreatedBy, m => m.MapFrom(s => s.CreatedBy.FirstName + " " + s.CreatedBy.LastName));
+
+            Mapper.CreateMap<TicketModel, Ticket>()
+                .ForMember(x => x.CreatedBy, m => m.Ignore());
 
             Mapper.CreateMap<TicketNote, NoteModel>()
                 .ForMember(x => x.CreatedBy, m => m.MapFrom(s => s.CreatedBy.FirstName + " " + s.CreatedBy.LastName));

@@ -24,6 +24,8 @@
     <button ng-click="saveTicket()">Save</button>
     <button ng-click="openTicket()" ng-show="isNew()">Open</button>
     <button ng-click="closeTicket()" ng-show="isOpen()">Close</button>
+    <br />
+    {{model.error}}
     <div>
         <hr/>
         <button ng-click="goToDashboard()">Go to dashboard</button>

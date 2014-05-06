@@ -5,7 +5,8 @@
 
         $scope.model = {
             selectedStatus: $scope.enums.ticketStatuses[0],
-            selectedPriority: $scope.enums.ticketPriorities[0]
+            selectedPriority: $scope.enums.ticketPriorities[0],
+            error: ""
         }
 
         ticketService.get({ id: $routeParams.ticketId }).$promise.then(function (data) {
@@ -27,11 +28,16 @@
             return $scope.model.selectedStatus.id == 2;
         }
 
-        $scope.saveTicket = function() {
-            $scope.model.ticket.ticketStatus = $scope.selectedStatus.id;
-            $scope.model.ticket.ticketPriority = $scope.selectedPriority.id;
-
-            $scope.model.ticket.$update();
+        $scope.saveTicket = function () {
+            console.log($scope.model.ticket);
+            $scope.model.ticket.ticketStatus = $scope.model.selectedStatus.id;
+            $scope.model.ticket.ticketPriority = $scope.model.selectedPriority.id;
+            
+            $scope.model.ticket.$update(function success() {
+                $scope.model.error = "saved.";
+            }, function error(response) {
+                $scope.model.error = response.data.exceptionMessage;
+            });
         }
 
         $scope.openTicket = function () {
