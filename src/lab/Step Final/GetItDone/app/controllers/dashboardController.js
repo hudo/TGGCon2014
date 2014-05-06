@@ -1,10 +1,13 @@
 ﻿(function () {
-    var dashboardController = function ($scope, $location, ticketService) {
+    var dashboardController = function ($scope, $location, ticketService, enums) {
 
         $scope.newTicket = { name: "" };
 
+        $scope.enums = enums;
+
         $scope.model = {
-            tickets: ticketService.query()
+            //tickets: ticketService.query()
+            tickets: [ { title: "First", createdBy: "Tom", ticketStatus: 0, ticketPriority: 1}]
         };
 
         $scope.createNewTicket = function () {
@@ -23,5 +26,5 @@
         }
     };
 
-    getItDone.app.controller("dashboardController", ["$scope", "$location", "ticketService", dashboardController]);
+    getItDone.app.controller("dashboardController", ["$scope", "$location", "ticketService", "enums", dashboardController]);
 })();

@@ -125,6 +125,7 @@
     <Content Include="app\app.js" />
     <Content Include="app\controllers\editTicketController.js" />
     <Content Include="app\controllers\dashboardController.js" />
+    <Content Include="app\services\constants.js" />
     <Content Include="app\services\ticketService.js" />
     <Content Include="app\views\editTicket.html" />
     <Content Include="app\views\dashboard.html" />
