@@ -6,7 +6,7 @@
         </div>
         <div>
             <label>Description:</label>
-            <textarea ng-model="model.description"></textarea>
+            <textarea ng-model="model.description" ng-readonly="!isOpen()"></textarea>
         </div>
         <div>
             <label>Supported user:</label>

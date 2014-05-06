@@ -12,8 +12,8 @@ namespace GetItDone.Migrations
                 c => new
                     {
                         TicketId = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        Description = c.String(),
+                        Title = c.String(maxLength: 4000),
+                        Description = c.String(maxLength: 4000),
                         Created = c.DateTime(nullable: false),
                         Closed = c.DateTime(),
                         CreatedById = c.Int(nullable: false),
@@ -31,7 +31,7 @@ namespace GetItDone.Migrations
                         TicketNoteId = c.Int(nullable: false, identity: true),
                         CreatedById = c.Int(nullable: false),
                         Created = c.DateTime(nullable: false),
-                        Content = c.String(),
+                        Content = c.String(maxLength: 4000),
                         TicketId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.TicketNoteId)
@@ -45,8 +45,8 @@ namespace GetItDone.Migrations
                 c => new
                     {
                         UserId = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
-                        LastName = c.String(),
+                        FirstName = c.String(maxLength: 4000),
+                        LastName = c.String(maxLength: 4000),
                     })
                 .PrimaryKey(t => t.UserId);
             
