@@ -1,0 +1,11 @@
+var support = new CustomerSupport();
+
+var user = new User("demo", "demo");
+user.AddToRole(support);
+
+context.Users.AddOrUpdate(x => x.LastName, user);
+
+var ticket = new Ticket("test ticket", TicketPriority.Medium, user);
+ticket.AddNote(user, "some note");
+
+context.Tickets.AddOrUpdate(x=>x.Title, ticket);

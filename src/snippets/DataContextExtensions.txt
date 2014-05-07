@@ -1,0 +1,48 @@
+public static class DataContextExtensions
+{
+    /// <summary>
+    /// Map private collection property
+    /// </summary>
+    /// <typeparam name="T">Entity type</typeparam>
+    /// <typeparam name="R">Collection entity</typeparam>
+    /// <param name="propertyName">property name</param>
+    public static ManyNavigationPropertyConfiguration<T, R> HasMany<T, R>(this EntityTypeConfiguration<T> mapper, string propertyName)
+        where T : class
+        where R : class
+    {
+
+        Type type = typeof(T);
+        ParameterExpression arg = Expression.Parameter(type, "x");
+        Expression expr = arg;
+
+        PropertyInfo pi = type.GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+        expr = Expression.Property(expr, pi);
+
+        LambdaExpression lambda = Expression.Lambda(expr, arg);
+
+        var expression = (Expression<Func<T, ICollection<R>>>)lambda;
+
+        return mapper.HasMany(expression);
+    }
+
+    /// <summary>
+    /// Map private property
+    /// </summary>
+    /// <typeparam name="T">Entity type</typeparam>
+    /// <param name="propertyName">property name</param>
+    public static StringPropertyConfiguration Property<T>(this EntityTypeConfiguration<T> mapper, string propertyName) where T : class
+    {
+        Type type = typeof(T);
+        ParameterExpression arg = Expression.Parameter(type, "x");
+        Expression expr = arg;
+
+        PropertyInfo pi = type.GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+        expr = Expression.Property(expr, pi);
+
+        LambdaExpression lambda = Expression.Lambda(expr, arg);
+
+        var expression = (Expression<Func<T, string>>)lambda;
+
+        return mapper.Property(expression);
+    }
+}

@@ -14,5 +14,4 @@ namespace GetItDone.ViewModel
         public TicketStatus TicketStatus { get; set; }
         public string CreatedBy { get; set; }
     }
-
 }

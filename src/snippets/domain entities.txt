@@ -1,0 +1,171 @@
+public class Customer : UserRole
+{
+    
+}
+
+
+public class CustomerSupport : UserRole
+{
+    
+}
+
+public abstract class UserRole
+{
+    public int UserRoleId { get; set; }
+    public int UserId { get; set; }
+    public virtual User User { get; set; }
+}
+
+public class User
+{
+    protected User()
+    {
+    }
+
+    public User(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Roles = new Collection<UserRole>();
+    }
+
+    public int UserId { get; protected set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public virtual ICollection<UserRole> Roles { get; protected set; }
+
+    public bool Is<T>() where T : UserRole
+    {
+        return Roles.OfType<T>().Any();
+    }
+
+    public T GetRole<T>() where T : UserRole
+    {
+        return Roles.OfType<T>().Single();
+    }
+
+    public void AddToRole<T>(T role) where T:UserRole
+    {
+        if (!Is<T>())
+        {
+            Roles.Add(role);
+        }
+    }
+}
+
+
+public enum TicketStatus
+{
+    New,
+    InProgress,
+    Closed
+}
+
+public enum TicketPriority
+{
+    Low,
+    Medium,
+    High
+}
+
+
+public class TicketNote
+{
+    public TicketNote(Ticket ticket, User createdBy, string content)
+    {
+        CreatedById = createdBy.UserId;
+        CreatedBy = createdBy;
+        Ticket = ticket;
+        TicketId = ticket.TicketId;
+        Content = content;
+        Created = DateTime.Now;
+    }
+
+    protected TicketNote()
+    {
+        
+    }
+
+    public int TicketNoteId { get; private set; }
+    public int CreatedById { get; private set; }
+    public virtual User CreatedBy { get; protected set; }
+    public DateTime Created { get; protected set; }
+    public string Content { get; set; }
+
+    public int TicketId { get; protected set; }
+    public virtual Ticket Ticket { get; protected set; }
+}
+
+
+public class Ticket
+{
+    private readonly Dictionary<TicketStatus, TicketStatus[]> _stateTransitionRules = new Dictionary<TicketStatus, TicketStatus[]>()
+    {
+        {TicketStatus.New,  new []{ TicketStatus.InProgress, TicketStatus.Closed }},
+        {TicketStatus.InProgress,  new []{ TicketStatus.Closed }},
+        {TicketStatus.Closed, new TicketStatus[]{} }
+    }; 
+
+    protected Ticket()
+    {
+        _notes = new Collection<TicketNote>();
+    }
+
+    public Ticket(string title, TicketPriority priority, User createdBy)
+    {
+        if(!createdBy.Is<CustomerSupport>())
+            throw new Exception("This user is not customer support!");
+
+        CreatedBy = createdBy;
+
+        Title = title;
+        TicketPriority = priority;
+        _notes = new Collection<TicketNote>();
+
+        TicketStatus = TicketStatus.New;
+        Created = DateTime.Now;
+    }
+
+    public int TicketId { get; protected set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime Created { get; set; }
+    public DateTime? Closed { get; protected set; }
+    public int CreatedById { get; protected set; }
+    public virtual User CreatedBy { get; protected set; }
+    public TicketPriority TicketPriority { get; set; }
+    public TicketStatus TicketStatus { get; protected set; }
+
+    protected virtual ICollection<TicketNote> _notes { get; set; }
+
+    public IEnumerable<TicketNote> TicketNotes
+    {
+        get
+        {
+            return _notes.ToList();
+        }
+    }
+
+    public void AddNote(User user, string content)
+    {
+        _notes.Add(new TicketNote(this, user, content));
+    }
+
+    public void ChangeStatus(TicketStatus newStatus)
+    {
+        if (_stateTransitionRules[this.TicketStatus].Contains(newStatus))
+        {
+            this.TicketStatus = newStatus;
+
+            if (newStatus == TicketStatus.Closed)
+            {
+                Closed = DateTime.Now;
+            }
+        }
+        else
+        {
+            throw new Exception("Can't change status from " + this.TicketStatus + " to " + newStatus);
+        }
+    }
+}

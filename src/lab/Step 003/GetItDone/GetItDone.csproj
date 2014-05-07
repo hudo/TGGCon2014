@@ -133,21 +133,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.js" />
-    <Content Include="app\controllers\editTicketController.js" />
-    <Content Include="app\controllers\dashboardController.js" />
-    <Content Include="app\services\constants.js" />
-    <Content Include="app\services\ticketService.js" />
-    <Content Include="app\views\editTicket.html" />
-    <Content Include="app\views\dashboard.html" />
-    <Content Include="Assets\Scripts\angular-resource.js" />
-    <Content Include="Assets\Scripts\angular-route.js" />
-    <Content Include="Assets\Scripts\angular-sanitize.js" />
-    <Content Include="Assets\Scripts\angular.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Index.html" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -201,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201405061929567_Init.resx">

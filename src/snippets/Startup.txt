@@ -1,17 +1,3 @@
-﻿using System.Web.Http;
-using AutoMapper;
-using GetItDone.Data;
-using GetItDone.Domain;
-using GetItDone.Infrastructure;
-using GetItDone.ViewModel;
-using Microsoft.Ajax.Utilities;
-using Microsoft.Owin;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Owin;
-using StructureMap;
-using StructureMap.Web.Pipeline;
-
 [assembly: OwinStartup(typeof(GetItDone.Startup))]
 
 namespace GetItDone
@@ -44,6 +30,9 @@ namespace GetItDone
 
             Mapper.CreateMap<TicketModel, Ticket>()
                 .ForMember(x => x.CreatedBy, m => m.Ignore());
+
+            Mapper.CreateMap<TicketNote, NoteModel>()
+                .ForMember(x => x.CreatedBy, m => m.MapFrom(s => s.CreatedBy.FirstName + " " + s.CreatedBy.LastName));
         }
     }
 }
