@@ -1,0 +1,31 @@
+﻿<div>
+    <div>
+        <h1>Dashboard</h1>        
+    </div>
+    <div>
+        <label>
+            <input ng-model="model.newTicketName" />
+        </label>
+        <button ng-click='createNewTicket()' ng-disabled="!canCreateNewTicket()">Create new ticket</button>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Supported User</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Commands</th>
+            </tr>
+            <tr ng-repeat='ticket in model.tickets'>
+                <td>{{ticket.title}}</td>
+                <td>{{ticket.createdBy}}</td>
+                <td><select data-ng-options="o.name for o in enums.ticketStatuses" data-ng-model="enums.ticketStatuses[ticket.ticketStatus]" ng-disabled="true"></select></td>
+                <td><select data-ng-options="o.name for o in enums.ticketPriorities" data-ng-model="enums.ticketPriorities[ticket.ticketPriority]" ng-disabled="true"></select></td>
+                <td>
+                    <button ng-click='openTicket(ticket.ticketId)'>Open</button>
+                </td>
+            </tr>
+        </table>        
+    </div>
+</div>
