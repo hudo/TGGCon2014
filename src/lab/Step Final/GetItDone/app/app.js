@@ -15,6 +15,4 @@
             });;
         }
     ]);
-
-    window.log = console.log;
 }());
