@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GetItDone.Domain.Customer" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetItDone.Domain.CustomerSupport" Collapsed="true">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\CustomerSupport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetItDone.Domain.Ticket" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAEAAAKggAEAAAAEAAAAAAAQAABQAAAAAAACIAAE=</HashCode>
+      <FileName>Domain\Ticket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetItDone.Domain.TicketNote" Collapsed="true">
+    <Position X="8.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAiAAAAACAAAAAAAAAAAAABQAAAAAAAAAAAE=</HashCode>
+      <FileName>Domain\TicketNote.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetItDone.Domain.User">
+    <Position X="1.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEEAAAAAAAAAAAAAAAgAAgBAAAAAAAIAAAAAAAg=</HashCode>
+      <FileName>Domain\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetItDone.Domain.UserRole" Collapsed="true">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Domain\UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="GetItDone.Domain.TicketPriority" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Domain\TicketPriority.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GetItDone.Domain.TicketStatus" Collapsed="true">
+    <Position X="8.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABCAAAA=</HashCode>
+      <FileName>Domain\TicketStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
